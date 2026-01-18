@@ -59,6 +59,6 @@ public class RegisterVoteUseCase {
                 .voter(voter)
                 .voteDatetime(ZonedDateTime.now())
                 .build()
-        ).flatMap(votePort::save);
+        );
     }
 }
