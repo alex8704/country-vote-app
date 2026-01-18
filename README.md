@@ -122,6 +122,4 @@ Para más información sobre cada componente, consulta:
 
 Las contribuciones son bienvenidas. Por favor, asegúrate de seguir las convenciones de código establecidas en cada componente.
 
-## 📄 Licencia
 
-[Especificar licencia si aplica]
