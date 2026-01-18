@@ -1,0 +1,47 @@
+<div class="card shadow-sm">
+  <div class="card-body">
+    <table class="table table-borderless">
+      <thead>
+      <tr>
+        <th scope="col">
+          Country
+        </th>
+        <th scope="col">
+          Capital City
+        </th>
+        <th scope="col">
+          Region
+        </th>
+        <th scope="col">
+          Sub Region
+        </th>
+        <th scope="col" class="text-center">
+          Votes
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (companyVoteCount of data(); track companyVoteCount.votedCountry.id) {
+          <tr>
+            <td>
+              {{ companyVoteCount.votedCountry.commonName }}
+            </td>
+            <td>
+              {{ companyVoteCount.votedCountry.capitalCity }}
+            </td>
+            <td>
+              {{ companyVoteCount.votedCountry.region }}
+            </td>
+            <td>
+              {{ companyVoteCount.votedCountry.subregion }}
+            </td>
+            <td class="text-center">
+              {{ companyVoteCount.voteCount }}
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+

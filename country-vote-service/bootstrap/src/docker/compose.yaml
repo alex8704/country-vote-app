@@ -1,0 +1,3 @@
+name: country-vote-service-tools
+include:
+  - postgres/compose.yaml

@@ -1,0 +1,19 @@
+[versions]
+spring-boot = "4.0.2-SNAPSHOT"
+spring-dependency-management = "1.1.7"
+spring-boot-dependencies = "4.0.2-SNAPSHOT"
+lombok = "1.18.42"
+reactor-core = "3.8.2"
+blockhound-junit-platform = "1.0.16.RELEASE"
+
+
+[libraries]
+lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
+reactor-core = { module = "io.projectreactor:reactor-core", version.ref = "reactor-core" }
+spring-boot-dependencies = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot-dependencies" }
+blockhound-junit-platform = { module = "io.projectreactor.tools:blockhound-junit-platform", version.ref = "blockhound-junit-platform" }
+
+
+[plugins]
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }

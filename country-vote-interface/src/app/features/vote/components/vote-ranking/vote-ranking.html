@@ -1,0 +1,11 @@
+<div>
+  <section>
+    <h2>Top 10 Most Voted Countries</h2>
+  </section>
+  <section class="py-1">
+    <app-vote-ranking-filter-box (termChanged)="changeSearchTerm($event)"/>
+  </section>
+  <section class="pt-4">
+    <app-vote-ranking-table [data]="voteRankingData()"/>
+  </section>
+</div>

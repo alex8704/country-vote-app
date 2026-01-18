@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: '${SQL_DB_NAME}'
+      POSTGRES_USER: '${SQL_DB_USER}'
+      POSTGRES_PASSWORD: '${SQL_DB_PASSWORD}'
+    ports:
+      - '${SQL_DB_PORT}:5432'
+    expose:
+      - '5432'
+    volumes:
+      - country-vote-postgres:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${SQL_DB_USER} -d ${SQL_DB_NAME}" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  country-vote-postgres:

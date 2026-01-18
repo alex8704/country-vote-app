@@ -1,0 +1,74 @@
+<div class="card shadow-sm bg-white">
+  <div class="card-body">
+    <h5 class="card-title">Vote your Favourite Country</h5>
+    <form class="pt-1 pb-3"
+          novalidate
+          (submit)="registerVote()">
+      <div class="row flex-grow-1 g-3">
+        <div class="col-md">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Name"
+            [class.is-invalid]="formFieldMustShowFeedback(voteForm.voter.name())"
+            [formField]="voteForm.voter.name"
+          >
+          @for (error of voteForm.voter.name().errors().slice(0, 1); track error) {
+            <div class="invalid-feedback">{{ error.message }}</div>
+          }
+        </div>
+        <div class="col-md">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Email"
+            [class.is-invalid]="formFieldMustShowFeedback(voteForm.voter.email())"
+            [formField]="voteForm.voter.email"
+          >
+          @for (error of voteForm.voter.email().errors().slice(0, 1); track error) {
+            <div class="invalid-feedback">{{ error.message }}</div>
+          }
+        </div>
+        <div class="col-md">
+          <input
+            type="hidden"
+            [formField]="voteForm.countryAlpha3Code"
+          />
+          <input
+            type="text"
+            name="selectedCountry"
+            placeholder="Country"
+            class="form-control"
+            [class.is-invalid]="formFieldMustShowFeedback(voteForm.countryAlpha3Code())"
+            [editable]="false"
+            [ngbTypeahead]="countrySearch"
+            [inputFormatter]="formatCountryItem"
+            [resultFormatter]="formatCountryItem"
+            (blur)="voteForm.countryAlpha3Code().markAsTouched()"
+            [(ngModel)]="selectedCountry"
+            [ngModelOptions]="{updateOn: 'blur'}"
+            (selectItem)="voteForm.countryAlpha3Code().value.set($event.item.alpha3Code)"
+            (ngModelChange)="!$event && voteForm.countryAlpha3Code().value.set('')"
+          />
+          @if (countriesSearching()) {
+            <small class="form-text text-muted">searching...</small>
+          }
+          @for (error of voteForm.countryAlpha3Code().errors().slice(0, 1); track error) {
+            <div class="invalid-feedback">{{ error.message }}</div>
+          }
+        </div>
+
+        <div class="col-md-auto">
+          <div class="d-flex justify-content-end">
+            <button  type="submit"
+                     class="btn btn-dark"
+                     [disabled]="voteForm().invalid()">
+              Submit Vote
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>

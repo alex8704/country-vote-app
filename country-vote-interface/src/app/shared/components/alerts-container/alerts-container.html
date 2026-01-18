@@ -1,0 +1,8 @@
+@for (alert of alertService.alerts(); track alert) {
+  <ngb-toast
+    class="bg-warning text-light"
+    [header]="alert.header" [autohide]="true" [delay]="alert.delay || 5000"
+    (hidden)="alertService.remove(alert)"
+  >{{ alert.body }}
+  </ngb-toast>
+}

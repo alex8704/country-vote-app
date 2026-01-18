@@ -1,0 +1,56 @@
+server:
+  port: ${APP_SERVER_PORT:8080}
+
+
+spring:
+  application:
+    name: country-vote-service
+
+  webflux:
+    base-path: /api
+
+  r2dbc:
+    url: ${R2DBC_URL:r2dbc:postgresql://localhost:5432/country_vote_db}
+    username: ${R2DBC_USERNAME:service}
+    password: ${R2DBC_PASSWORD:passw**rd}
+    pool:
+      enabled: true
+      initial-size: 2
+      max-size: 5
+      max-idle-time: 30m
+      max-life-time: 60m
+      validation-query: SELECT 1
+      max-acquire-time: PT5S
+      max-create-connection-time: PT10S
+
+  docker:
+    compose:
+      enabled: ${ENABLE_DOCKER_COMPOSE:true}
+      file: src/docker/compose.yaml
+  jackson:
+    default-property-inclusion: non_null
+
+management:
+  health:
+    defaults:
+    custom:
+      enabled: true
+      status: UP
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus,metrics,info
+  server:
+    port: ${APP_ACTUATOR_PORT:9090}
+
+logging:
+  level:
+    root: WARN
+    io.r2dbc: WARN
+    org.springframework.r2dbc: WARN
+    org.springframework.data.r2dbc: WARN
+    dev.loopstudio: INFO
+
+consumer:
+  rest-countries:
+    base-url: ${REST_COUNTRIES_BASE_URL:https://restcountries.com/v3.1}
